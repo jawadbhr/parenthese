@@ -4,205 +4,83 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Parenthèse — Tes citations positives, chaque jour</title>
-  <meta name="description" content="Parenthèse t'accompagne au quotidien avec des citations positives et des affirmations, directement sur ton écran. Widget, personnalisation, plus de 6000 citations.">
+  <meta name="description" content="Parenthèse t'accompagne au quotidien avec des citations positives et des affirmations, directement sur ton écran.">
   <meta property="og:title" content="Parenthèse — Citations & affirmations positives">
   <meta property="og:description" content="Ta pause quotidienne : des citations qui te touchent, sur ton écran d'accueil.">
   <meta property="og:type" content="website">
   <style>
     :root{
-      --cream:#F6F1E7; --cream-hi:#FBF7EF; --cream-lo:#EFE6D3; --paper:#FFFDF8;
+      --cream:#F6F1E7; --cream-hi:#FBF7EF; --cream-lo:#EFE6D3;
       --ink:#1F1810; --body:#4a4034; --sub:#6B5D47;
       --gold:#B08A4A; --gold-soft:#C9A96E; --line:rgba(176,138,74,0.18);
     }
     *{box-sizing:border-box;margin:0;padding:0;}
-    html{scroll-behavior:smooth;}
+    html,body{height:100%;}
     body{
-      background:linear-gradient(180deg,var(--cream-hi) 0%,var(--cream) 45%,var(--cream-lo) 100%);
+      background:linear-gradient(180deg,var(--cream-hi) 0%,var(--cream) 55%,var(--cream-lo) 100%);
       color:var(--ink);
       font-family:Georgia,'Times New Roman',serif;
-      line-height:1.65;-webkit-font-smoothing:antialiased;
+      -webkit-font-smoothing:antialiased;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      min-height:100svh;text-align:center;padding:36px 26px;
       overflow-x:hidden;
     }
-    .wrap{max-width:1020px;margin:0 auto;padding:72px 24px 60px;}
-
-    /* halo décoratif */
-    .halo{position:fixed;top:-260px;left:50%;transform:translateX(-50%);
-      width:820px;height:820px;border-radius:50%;pointer-events:none;z-index:0;
+    .halo{position:fixed;top:-240px;left:50%;transform:translateX(-50%);
+      width:760px;height:760px;border-radius:50%;pointer-events:none;z-index:0;
       background:radial-gradient(circle,rgba(201,169,110,0.16) 0%,rgba(201,169,110,0) 65%);}
 
-    /* animations */
-    @keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:none;}}
-    .fx{opacity:0;animation:fadeUp .8s ease forwards;}
-    .d1{animation-delay:.05s}.d2{animation-delay:.15s}.d3{animation-delay:.25s}
-    .d4{animation-delay:.35s}.d5{animation-delay:.5s}.d6{animation-delay:.65s}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
+    .fx{opacity:0;animation:fadeUp .7s ease forwards;position:relative;z-index:1;}
+    .d1{animation-delay:.05s}.d2{animation-delay:.16s}.d3{animation-delay:.28s}
+    .d4{animation-delay:.4s}.d5{animation-delay:.55s}
 
-    /* ── HERO ── */
-    .hero{position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;
-      gap:48px;align-items:center;}
-    .hero-txt{max-width:520px;}
-    .logo{width:84px;height:84px;border-radius:20px;
-      box-shadow:0 12px 34px rgba(176,138,74,0.28);margin-bottom:26px;}
-    h1{font-size:64px;font-weight:700;letter-spacing:.5px;line-height:1.04;margin-bottom:8px;}
-    .h1sub{font-size:20px;color:var(--gold);font-style:italic;margin-bottom:22px;}
-    .tagline{font-size:19px;color:var(--body);margin-bottom:26px;max-width:420px;}
-    .proof{display:flex;align-items:center;gap:12px;margin-bottom:32px;flex-wrap:wrap;}
-    .stars{color:var(--gold-soft);font-size:17px;letter-spacing:3px;}
-    .proof span{font-size:14.5px;color:var(--sub);}
+    .logo{width:92px;height:92px;border-radius:22px;
+      box-shadow:0 12px 32px rgba(176,138,74,0.28);margin-bottom:26px;}
+    h1{font-size:46px;font-weight:700;letter-spacing:.5px;line-height:1.05;}
+    .h1sub{font-size:18px;color:var(--gold);font-style:italic;margin-top:4px;margin-bottom:20px;}
+    .tagline{font-size:17.5px;color:var(--body);line-height:1.6;max-width:330px;margin:0 auto 22px;}
+    .proof{margin-bottom:30px;}
+    .stars{color:var(--gold-soft);font-size:17px;letter-spacing:3px;display:block;margin-bottom:6px;}
+    .proof span{font-size:14px;color:var(--sub);}
     .proof b{color:var(--gold);}
 
-    /* bouton App Store — logo Apple en SVG (aucun caractère spécial) */
-    .store{display:inline-flex;align-items:center;gap:14px;background:#111;color:#fff;
-      text-decoration:none;border-radius:15px;padding:13px 26px 13px 20px;
+    .store{display:inline-flex;align-items:center;gap:13px;background:#111;color:#fff;
+      text-decoration:none;border-radius:15px;padding:14px 28px 14px 22px;
       font-family:-apple-system,'Segoe UI',Roboto,sans-serif;
-      transition:transform .18s ease, box-shadow .18s ease;
-      box-shadow:0 8px 24px rgba(31,24,16,0.22);}
-    .store:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(31,24,16,0.3);}
+      box-shadow:0 10px 26px rgba(31,24,16,0.25);
+      transition:transform .18s ease;}
+    .store:active{transform:scale(.97);}
     .store svg{width:30px;height:30px;fill:#fff;flex-shrink:0;}
+    .store .lbl{text-align:left;}
     .store .lbl small{display:block;font-size:11px;opacity:.75;letter-spacing:.4px;}
     .store .lbl span{display:block;font-size:20px;font-weight:600;margin-top:1px;letter-spacing:.2px;}
 
-    /* ── MOCKUP IPHONE (CSS pur) ── */
-    .phone{position:relative;width:270px;height:552px;background:#161310;border-radius:44px;
-      box-shadow:0 30px 70px rgba(60,45,25,0.35), inset 0 0 0 2px rgba(255,255,255,0.06);
-      padding:10px;flex-shrink:0;}
-    .screen{position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;
-      background:linear-gradient(180deg,#FBF7EF 0%,#F1E9D9 100%);
-      display:flex;flex-direction:column;align-items:center;}
-    .notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);
-      width:86px;height:22px;background:#161310;border-radius:12px;z-index:3;}
-    .time{font-size:64px;font-weight:300;color:var(--ink);margin-top:64px;line-height:1;}
-    .date{font-size:13px;color:var(--sub);margin-top:6px;}
-    .widget{margin-top:26px;width:82%;background:rgba(255,253,248,0.95);
-      border:1px solid var(--line);border-radius:20px;padding:18px 16px;text-align:center;
-      box-shadow:0 8px 22px rgba(176,138,74,0.12);}
-    .widget .paren{color:var(--gold);font-size:15px;letter-spacing:5px;margin-bottom:9px;}
-    .widget .q{font-size:14.5px;font-style:italic;color:var(--ink);line-height:1.5;}
-    .widget .a{font-size:11.5px;color:var(--sub);margin-top:9px;}
-    .homebar{position:absolute;bottom:9px;left:50%;transform:translateX(-50%);
-      width:96px;height:4px;border-radius:2px;background:rgba(31,24,16,0.25);}
-
-    /* ── FEATURES ── */
-    .features{position:relative;z-index:1;margin-top:84px;
-      display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
-    .card{background:var(--paper);border:1px solid var(--line);border-radius:22px;
-      padding:28px 22px;transition:transform .18s ease, box-shadow .18s ease;}
-    .card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(176,138,74,0.12);}
-    .ico{width:46px;height:46px;border-radius:14px;background:rgba(176,138,74,0.12);
-      display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
-    .ico svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:1.8;
-      stroke-linecap:round;stroke-linejoin:round;}
-    .card h3{font-size:17.5px;font-weight:600;margin-bottom:6px;}
-    .card p{font-size:14px;color:var(--body);line-height:1.55;}
-
-    /* ── CITATION BANDEAU ── */
-    .quoteband{position:relative;z-index:1;text-align:center;margin-top:84px;padding:0 12px;}
-    .quoteband .mark{color:var(--gold);font-size:30px;letter-spacing:8px;margin-bottom:14px;}
-    .quoteband blockquote{font-size:26px;font-style:italic;line-height:1.5;max-width:640px;margin:0 auto;}
-    .quoteband cite{display:block;font-size:15px;color:var(--sub);margin-top:12px;font-style:normal;}
-
-    /* ── CTA FINAL ── */
-    .cta-final{position:relative;z-index:1;text-align:center;margin-top:72px;}
-    .cta-final h2{font-size:30px;font-weight:600;margin-bottom:20px;}
-
-    .foot{position:relative;z-index:1;text-align:center;color:var(--sub);
-      font-size:13px;margin-top:76px;border-top:1px solid var(--line);padding-top:26px;}
-    .foot a{color:var(--gold);text-decoration:none;margin:0 10px;}
-
-    @media(max-width:880px){
-      .wrap{padding-top:52px;}
-      .hero{grid-template-columns:1fr;text-align:center;gap:40px;}
-      .hero-txt{max-width:100%;display:flex;flex-direction:column;align-items:center;}
-      h1{font-size:46px;}
-      .phone{margin:0 auto;}
-      .features{grid-template-columns:1fr 1fr;}
-      .quoteband blockquote{font-size:21px;}
-    }
-    @media(max-width:460px){ .features{grid-template-columns:1fr;} }
+    .foot{margin-top:44px;color:var(--sub);font-size:12.5px;position:relative;z-index:1;}
+    .foot a{color:var(--gold);text-decoration:none;margin:0 8px;}
   </style>
 </head>
 <body>
   <div class="halo"></div>
-  <div class="wrap">
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-txt">
-        <img class="logo fx d1" src="logo.png" alt="Parenthèse">
-        <h1 class="fx d2">Parenthèse</h1>
-        <p class="h1sub fx d2">citations du jour</p>
-        <p class="tagline fx d3">Tes citations positives et tes affirmations, chaque jour, directement sur ton écran.</p>
-        <div class="proof fx d3">
-          <span class="stars">★★★★★</span>
-          <span><b>4,7 / 5</b> &nbsp;·&nbsp; plus de <b>10 000</b> téléchargements</span>
-        </div>
-        <a class="store fx d4" href="https://apps.apple.com/app/id6761851376">
-          <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-          <span class="lbl"><small>Télécharger dans</small><span>l'App Store</span></span>
-        </a>
-      </div>
-
-      <!-- Mockup iPhone -->
-      <div class="phone fx d5" aria-hidden="true">
-        <div class="notch"></div>
-        <div class="screen">
-          <div class="time">9:41</div>
-          <div class="date">mardi 1 juillet</div>
-          <div class="widget">
-            <div class="paren">(&nbsp;&nbsp;)</div>
-            <div class="q">« Je suis capable de bien plus que je ne l'imagine. »</div>
-            <div class="a">— Parenthèse</div>
-          </div>
-          <div class="homebar"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FEATURES -->
-    <section class="features">
-      <div class="card fx d4">
-        <div class="ico"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="10" y1="18.5" x2="14" y2="18.5"/></svg></div>
-        <h3>Sur ton écran</h3>
-        <p>Un widget élégant sur ton écran d'accueil et de verrouillage, toute la journée.</p>
-      </div>
-      <div class="card fx d5">
-        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></div>
-        <h3>Rien que pour toi</h3>
-        <p>Des citations et affirmations choisies selon tes thèmes et ton humeur.</p>
-      </div>
-      <div class="card fx d5">
-        <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 19.5V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v13.5"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><line x1="9" y1="8" x2="15" y2="8"/></svg></div>
-        <h3>Ton espace</h3>
-        <p>Favoris, journal personnel, recherche dans des milliers de citations.</p>
-      </div>
-      <div class="card fx d6">
-        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-9A5.5 5.5 0 0 1 12 6.5 5.5 5.5 0 0 1 21.5 12C19 16.4 12 21 12 21z"/></svg></div>
-        <h3>Une pause par jour</h3>
-        <p>Transforme ton quotidien en 5 minutes, une citation à la fois.</p>
-      </div>
-    </section>
-
-    <!-- CITATION -->
-    <section class="quoteband fx d6">
-      <div class="mark">(&nbsp;&nbsp;)</div>
-      <blockquote>« Cela semble toujours impossible, jusqu'à ce qu'on le fasse. »</blockquote>
-      <cite>— Nelson Mandela</cite>
-    </section>
-
-    <!-- CTA FINAL -->
-    <section class="cta-final">
-      <h2>Commence ta parenthèse aujourd'hui.</h2>
-      <a class="store" href="https://apps.apple.com/app/id6761851376">
-        <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-        <span class="lbl"><small>Télécharger dans</small><span>l'App Store</span></span>
-      </a>
-    </section>
-
-    <footer class="foot">
-      © 2026 Parenthèse — citations du jour
-      <br><br>
-      <a href="https://jawadbhr.github.io/parenthese-privacy/">Confidentialité</a>·
-      <a href="https://jawadbhr.github.io/parenthese-privacy/cgv.html">Conditions</a>
-    </footer>
+  <img class="logo fx d1" src="logo.png" alt="Parenthèse">
+  <h1 class="fx d2">Parenthèse</h1>
+  <p class="h1sub fx d2">citations du jour</p>
+  <p class="tagline fx d3">Tes citations positives et tes affirmations, chaque jour, directement sur ton écran.</p>
+  <div class="proof fx d3">
+    <span class="stars">★★★★★</span>
+    <span><b>4,7 / 5</b> · plus de <b>10 000</b> téléchargements</span>
   </div>
+
+  <a class="store fx d4" href="https://apps.apple.com/app/id6761851376">
+    <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+    <span class="lbl"><small>Télécharger dans</small><span>l'App Store</span></span>
+  </a>
+
+  <footer class="foot fx d5">
+    © 2026 Parenthèse
+    <br>
+    <a href="https://jawadbhr.github.io/parenthese-privacy/">Confidentialité</a>·
+    <a href="https://jawadbhr.github.io/parenthese-privacy/cgv.html">Conditions</a>
+  </footer>
 </body>
 </html>
